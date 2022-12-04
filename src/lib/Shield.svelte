@@ -1,23 +1,44 @@
 <script lang="ts">
 
   // TINCTURES
+  let chosenTinctures: number[] = [0,0,0,0]
   let currentTincture: number = 0
   let secondTincture: number = 0
   const incrementTincture = () => {
     console.log("incrementing first tincture")
-    if (currentTincture == tinctures.length-1) {
-      currentTincture = 0
+    if (chosenTinctures[0] == tinctures.length-1) {
+      chosenTinctures[0] = 0
     } else {
-      currentTincture += 1
+      chosenTinctures[0] += 1
     }
+    console.log(chosenTinctures)
   }
   const incrementSecondTincture = () => {
     console.log("incrementing second tincture")
-    if (secondTincture == tinctures.length-1) {
-      secondTincture = 0
+    if (chosenTinctures[1] == tinctures.length-1) {
+      chosenTinctures[1] = 0
     } else {
-      secondTincture += 1
+      chosenTinctures[1] += 1
     }
+    console.log(chosenTinctures)
+  }
+  const incrementThirdTincture = () => {
+    console.log("incrementing third tincture")
+    if (chosenTinctures[2] == tinctures.length-1) {
+      chosenTinctures[2] = 0
+    } else {
+      chosenTinctures[2] += 1
+    }
+    console.log(chosenTinctures)
+  }
+  const incrementFourthTincture = () => {
+    console.log("incrementing fourth tincture")
+    if (chosenTinctures[3] == tinctures.length-1) {
+      chosenTinctures[3] = 0
+    } else {
+      chosenTinctures[3] += 1
+    }
+    console.log(chosenTinctures)
   }
   type TinctureType = {
     name: string;
@@ -74,10 +95,21 @@
       cssClass: "per-bend-sinister",
       parts: ["per-bend-sinister-dexter-chief", "per-bend-sinister-sinister-base"]
     },
-    //{ name: "Per Bend Sinister", cssClass: "per-bend-sinister", parts: ["dexter chief", "sinister base"] },
-    //{ name: "Per Chevron", cssClass: "per-chevron", parts: ["chief","base"] },
-    //{ name: "Per Saltire", cssClass: "per-saltire", parts: ["chief","sinister","base","dexter"] },
-    //{ name: "Per Quarterly", cssClass: "per-quarterly", parts: ["sinister chief","dexter chief","dexter base","sinister base"] },
+    {
+      name: "Per Chevron",
+      cssClass: "per-chevron",
+      parts: ["per-chevron-chief","per-chevron-base"]
+    },
+    {
+      name: "Per Saltire",
+      cssClass: "per-saltire",
+      parts: ["chief","sinister","base","dexter"]
+    },
+    {
+      name: "Quarterly",
+      cssClass: "quarterly",
+      parts: ["sinister-chief","dexter-chief","sinister-base","dexter-base"]
+    },
     // TODO { name: "Per Gyronny", [] },
   ]
 
@@ -97,20 +129,22 @@
 <div class="shield" >
   <div class={divisions[currentDivision].cssClass}>
     {#each divisions[currentDivision].parts as part, index}
-      {#if index == 0}
-        <div class={part} style="background-color: {tinctures[currentTincture].hexcode}" >{part}</div>
-      {:else}
-        <div class={part} style="background-color: {tinctures[secondTincture].hexcode}" >{part}</div>
-      {/if}
+      <div class={part} style="background-color: {tinctures[chosenTinctures[index]].hexcode}" >{part}</div>
     {/each}
   </div>
 </div>
 
-<button on:click={ incrementTincture } style="background-color: {tinctures[currentTincture].hexcode}" >
-  { tinctures[currentTincture].name }
+<button on:click={ incrementTincture } style="background-color: {tinctures[chosenTinctures[0]].hexcode}" >
+  { tinctures[chosenTinctures[0]].name }
 </button>
-<button on:click={ incrementSecondTincture } style="background-color: {tinctures[secondTincture].hexcode}" >
-  { tinctures[secondTincture].name }
+<button on:click={ incrementSecondTincture } style="background-color: {tinctures[chosenTinctures[1]].hexcode}" >
+  { tinctures[chosenTinctures[1]].name }
+</button>
+<button on:click={ incrementThirdTincture } style="background-color: {tinctures[chosenTinctures[2]].hexcode}" >
+  { tinctures[chosenTinctures[2]].name }
+</button>
+<button on:click={ incrementFourthTincture } style="background-color: {tinctures[chosenTinctures[3]].hexcode}" >
+  { tinctures[chosenTinctures[3]].name }
 </button>
 <button on:click={ incrementDivision } >
   { divisions[currentDivision].name }
@@ -190,5 +224,32 @@
   .per-bend-sinister-sinister-base {
     margin:0;
     height: 50%;
+  }
+  .per-chevron {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+  .per-chevron-chief {
+    height:100%
+  }
+  .per-chevron-base {
+    height:100%;
+    transform:  translateY(-29%) rotate(45deg);
+  }
+  .quarterly {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .quarterly > div {
+    height: 50%;
+    width: 50%;
+  }
+  .quarterly > .dexter-chief {
+
   }
 </style>
