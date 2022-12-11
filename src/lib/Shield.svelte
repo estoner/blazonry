@@ -1,13 +1,13 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
   import { divisions, tinctures } from './store';
-  import { currentDivision, chosenTinctures } from './store';
+  import { chosenDivision, chosenTinctures } from './store';
 </script>
 
 <div class="shield" >
-  {#key $currentDivision}
-    <div class={divisions[$currentDivision].cssClass} >
-      {#each divisions[$currentDivision].parts as part, index}
+  {#key $chosenDivision}
+    <div class={divisions[$chosenDivision].cssClass} >
+      {#each divisions[$chosenDivision].parts as part, index}
         <div class={part} style="background-color: {tinctures[$chosenTinctures[index]].hexcode}" >{part}</div>
       {/each}
     </div>

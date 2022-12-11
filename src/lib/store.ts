@@ -61,8 +61,13 @@ export const divisions: DivisionType[] = [
         cssClass: "quarterly",
         parts: ["dexter-chief","sinister-chief","dexter-base","sinister-base"]
     },
+    {
+        name: "Gyronny",
+        cssClass: "gyronny",
+        parts: ["dexter-chief","sinister-chief","dexter-base","sinister-base"]
+    },
     // TODO { name: "Per Gyronny", [] },
 ]
 
 export let chosenTinctures = writable([0,0,0,0])
-export let currentDivision = writable(0)
+export let chosenDivision = writable(0)

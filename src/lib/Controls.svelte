@@ -1,6 +1,6 @@
 <script lang="ts">
   import { divisions, tinctures } from './store';
-  import { currentDivision, chosenTinctures } from './store';
+  import { chosenDivision, chosenTinctures } from './store';
 </script>
   
 {#each $chosenTinctures as chosenTincture, index}
@@ -12,8 +12,8 @@
   </select>
 {/each}
 
-<label for="currentDivision">Division:</label>
-<select bind:value={$currentDivision} >
+<label for="chosenDivision">Division:</label>
+<select bind:value={$chosenDivision} >
   {#each divisions as d, n}
     <option value={n}>{d.name}</option>
   {/each}
