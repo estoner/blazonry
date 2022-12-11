@@ -1,11 +1,12 @@
 <script lang="ts">
+  import { fade } from 'svelte/transition';
   import { divisions, tinctures } from './store';
   import { currentDivision, chosenTinctures } from './store';
 </script>
 
 <div class="shield" >
-  {#key currentDivision}
-    <div class={divisions[$currentDivision].cssClass}>
+  {#key $currentDivision}
+    <div class={divisions[$currentDivision].cssClass} >
       {#each divisions[$currentDivision].parts as part, index}
         <div class={part} style="background-color: {tinctures[$chosenTinctures[index]].hexcode}" >{part}</div>
       {/each}
@@ -100,6 +101,19 @@
   .per-chevron-base {
     height:100%;
     transform:  translateY(-29%) rotate(45deg);
+  }
+  .per-saltire {
+    margin: 0;
+    height: 150%;
+    width: 150%;
+    display: flex;
+    flex-flow: row wrap;
+    transform: translateX(-16.5%) translateY(-16.5%) rotate(-45deg);
+  }
+  .per-saltire > div {
+    margin: 0;
+    height: 50%;
+    width: 50%;
   }
   .quarterly {
     margin: 0;
